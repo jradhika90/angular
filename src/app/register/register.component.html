@@ -1,54 +1,102 @@
 <div class="container-fluid">
 
 	<h3> Registration Form </h3>
-  {{registerForm.value|json}}
+	{{registerForm.value|json}}
+
 	<form [formGroup]="registerForm">
 		<div class="form-group">
 			<label for="name">Name</label>
 			<input type="text" formControlName="name"
-      class="form-control" id="name" placeholder="Enter name">
-			<small class="form-text text-danger"> Please enter valid name.</small>
+      [class.is-invalid]="getName.invalid && getName.touched" class="form-control"
+      id="name" placeholder="Enter name">
+
+			<div *ngIf="getName.invalid && getName.touched">
+				<small *ngIf="getName.errors.required"
+      class="form-text text-danger">Please enter a name.</small>
+				<small *ngIf="getName.errors.minlength"
+      class="form-text text-danger"> Name should be minimum 3 characters.</small>
+			</div>
 		</div>
+		{{getName.errors | json}}
 		<div class="form-group">
 			<label for="email">Email</label>
 			<input type="email" formControlName="email"
-      class="form-control" id="email" placeholder="Enter name">
-			<small class="form-text text-danger"> Please enter valid email.</small>
+      [class.is-invalid]="getEmail.invalid && getEmail.touched" class="form-control"
+      id="email" placeholder="Enter name">
+
+
+			<div *ngIf="getEmail.invalid && getEmail.touched">
+				<small *ngIf="getEmail.errors.required"
+      class="form-text text-danger">Please enter an email.</small>
+				<small
+      class="form-text text-danger"> Please enter valid email.</small>
+			</div>
+			{{getEmail.errors | json}}
+
 		</div>
+
 		<div class="form-group">
 			<label for="password">Password</label>
 			<input type="text" formControlName="password"
-      class="form-control" id="password" placeholder="Enter password">
+      class="form-control"
+      id="password" placeholder="Enter password">
+
 			<small class="form-text text-danger"> Please enter valid password.</small>
 		</div>
+
 		<div class="form-group">
 			<label for="confirmpassword">Confirm Password</label>
 			<input type="text" formControlName="confirmpassword"
-      class="form-control" id="confirmpassword" placeholder="Enter name">
-			<small class="form-text text-danger"> Please enter confirm password.</small>
+       class="form-control"
+      id="confirmpassword" placeholder="Reenter password">
+
+			<small [class.d-none]="" class="form-text text-danger"> Please enter confirm password.</small>
 		</div>
+
 		<div formGroupName="address">
-			
+
 			<div class="form-group">
 				<label for="state">State</label>
 				<input type="text" formControlName="state"
       class="form-control" id="state" placeholder="Enter state">
+
 				<small class="form-text text-danger"> Please enter state.</small>
 			</div>
+
 			<div class="form-group">
 				<label for="country">Country</label>
 				<input type="text" formControlName="country"
-      class="form-control" id="country" placeholder="Enter country">
+      class="form-control"
+      id="country" placeholder="Enter country">
+
 				<small class="form-text text-danger"> Please enter country.</small>
 			</div>
-      <div class="form-group">
+
+			<div class="form-group">
 				<label for="postcode">Postcode</label>
 				<input type="text" formControlName="postcode"
-      class="form-control" id="postcode" placeholder="Enter postcode">
-				<small class="form-text text-danger"> Please enter postcode.</small>
+      class="form-control"
+      id="postcode" placeholder="Enter postcode">
+
+				<div>
+					<small *ngIf="getPostcode.errors.required"
+      class="form-text text-danger">Please enter a postcode.</small>
+					<small *ngIf="getPostcode.errors.minlength"
+      class="form-text text-danger"> Please enter valid postcode.</small>
+				</div>
 			</div>
+
+		</div>
+
+		<div class="form-check mb-5">
+			<input class="form-check-input" formControlName="tnc" type="checkbox">
+			<label class="form-check-label "> I agree to terms and conditions</label>
+
+			<div *ngIf="getTnc.errors">
+				<small class="form-text text-danger"> Please agree to terms and conditions.</small></div>
+			{{getTnc.errors | json}}
 		</div>
 		<button class="btn btn-primary">Submit</button>
 	</form>
-	
+
 </div>

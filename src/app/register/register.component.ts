@@ -6,6 +6,7 @@ import { FormGroup, FormControl,FormBuilder, Validators } from "@angular/forms";
   templateUrl: "./register.component.html"
 })
 export class RegisterComponent implements OnInit {
+  registerForm: FormGroup;
   // registerForm = new FormGroup({
   //   name: new FormControl(""),
   //   email: new FormControl(""),
@@ -21,31 +22,65 @@ export class RegisterComponent implements OnInit {
 
 constructor(private fb: FormBuilder){
  this.registerForm = this.fb.group({
-    name: ['', [Validators.required, Validators.minLength(3)]],
-    email: [''],
+    name: ['', Validators.compose([Validators.required, Validators.minLength(3)])],
+    
+    email: ['', Validators.compose([
+		Validators.required,
+		Validators.pattern('^[a-zA-Z0-9_.+-]+@[a-zA-Z0-9-]+.[a-zA-Z0-9-.]+$')
+	])],
     password: [''],
     confirmpassword: [''],
 
     address: this.fb.group({
       state: [''],
       country: [''],
-      postcode: ['']
-     })
+      postcode: ['', Validators.compose([
+		Validators.required,
+		Validators.pattern('[0-9]{6}')
+	])],
+     }),
+     tnc:['', Validators.requiredTrue]
   })
 }
 
   ngOnInit() {
     this.registerForm.patchValue({
-      name: "Radhika",
-      email: "test@abc.com",
+      name: "Ra",
+      email: "test@abc",
       password: "test",
       confirmpassword:"testing",
 
       address: {
         state: "VIC",
         country: "Australia",
-        postcode: "1234"
-      }
+        postcode: "1234a"
+      },
+      tnc: false
     });
+  }
+
+  
+  get getName() {
+    return this.registerForm.get('name');
+  }
+
+  get getEmail() {
+    return this.registerForm.get('email');
+  }
+
+  get getState() {
+    return this.registerForm.get('state');
+  }
+
+  get getCountry() {
+    return this.registerForm.get('country');
+  }
+
+  get getPostcode() {
+    return this.registerForm.get('postcode');
+  }
+
+   get getTnc() {
+    return this.registerForm.get('tnc');
   }
 }
