@@ -72,23 +72,9 @@
 				<small class="form-text text-danger"> Please enter country.</small>
 			</div>
 
-			<div class="form-group">
-				<label for="postcode">Postcode</label>
-				<input type="text" formControlName="postcode"
-      class="form-control"
-      id="postcode" placeholder="Enter postcode">
-
-				<div>
-					<small *ngIf="getPostcode.errors.required"
-      class="form-text text-danger">Please enter a postcode.</small>
-					<small *ngIf="getPostcode.errors.minlength"
-      class="form-text text-danger"> Please enter valid postcode.</small>
-				</div>
 			</div>
 
-		</div>
-
-		<div class="form-check mb-5">
+    <div class="form-check mb-5">
 			<input class="form-check-input" formControlName="tnc" type="checkbox">
 			<label class="form-check-label "> I agree to terms and conditions</label>
 
@@ -96,7 +82,8 @@
 				<small class="form-text text-danger"> Please agree to terms and conditions.</small></div>
 			{{getTnc.errors | json}}
 		</div>
-		<button class="btn btn-primary">Submit</button>
+
+			<button class="btn btn-primary">Submit</button>
 	</form>
 
 </div>
