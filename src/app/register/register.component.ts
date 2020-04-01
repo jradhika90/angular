@@ -31,7 +31,7 @@ constructor(private fb: FormBuilder){
     address: this.fb.group({
       state: [''],
       country: [''],
-      postcode: ['', Validators.compose([Validators.required,Validators.minLength(3)])],
+      postcode: ['', Validators.compose([Validators.required,Validators.pattern('[0-9]{6}')])],
      }),
      tnc:['', Validators.requiredTrue]
   })
@@ -71,7 +71,7 @@ constructor(private fb: FormBuilder){
   }
 
   get getPostcode() {
-    return this.registerForm.get('postcode');
+    return this.registerForm.get('address.postcode');
   }
 
    get getTnc() {
