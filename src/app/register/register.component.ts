@@ -33,6 +33,7 @@ constructor(private fb: FormBuilder){
       country: [''],
       postcode: ['', Validators.compose([Validators.required,Validators.pattern('[0-9]{6}')])],
      }),
+     timePreference:['Morning'],
      tnc:['', Validators.requiredTrue]
   })
 }
@@ -49,7 +50,8 @@ constructor(private fb: FormBuilder){
         country: "Australia",
         postcode: "1234a"
       },
-      tnc: false
+      timePreference: "Evening",
+      tnc: true
     });
   }
 
@@ -63,18 +65,22 @@ constructor(private fb: FormBuilder){
   }
 
   get getState() {
-    return this.registerForm.get('state');
+    return this.registerForm.get('address.state');
   }
 
   get getCountry() {
-    return this.registerForm.get('country');
+    return this.registerForm.get('address.country');
   }
 
   get getPostcode() {
     return this.registerForm.get('address.postcode');
   }
 
-   get getTnc() {
+  get getTimePreference() {
+    return this.registerForm.get('timePreference');
+  }
+
+  get getTnc() {
     return this.registerForm.get('tnc');
   }
 }

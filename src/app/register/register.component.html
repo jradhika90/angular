@@ -10,7 +10,7 @@
       [class.is-invalid]="getName.invalid && getName.touched" class="form-control"
       id="name" placeholder="Enter name">
 
-			<div *ngIf="getName.invalid && getName.touched">
+			<div *ngIf="getName.invalid && getName.dirty">
 				<small *ngIf="getName.errors.required"
       class="form-text text-danger">Please enter a name.</small>
 				<small *ngIf="getName.errors.minlength"
@@ -37,18 +37,14 @@
 
 		<div class="form-group">
 			<label for="password">Password</label>
-			<input type="text" formControlName="password"
-      class="form-control"
-      id="password" placeholder="Enter password">
+			<input type="text" formControlName="password" class="form-control" id="password" placeholder="Enter password">
 
 			<small class="form-text text-danger"> Please enter valid password.</small>
 		</div>
 
 		<div class="form-group">
 			<label for="confirmpassword">Confirm Password</label>
-			<input type="text" formControlName="confirmpassword"
-       class="form-control"
-      id="confirmpassword" placeholder="Reenter password">
+			<input type="text" formControlName="confirmpassword" class="form-control" id="confirmpassword" placeholder="Reenter password">
 
 			<small [class.d-none]="" class="form-text text-danger"> Please enter confirm password.</small>
 		</div>
@@ -60,17 +56,21 @@
 				<input type="text" formControlName="state"
       class="form-control" id="state" placeholder="Enter state">
 
-				<small class="form-text text-danger"> Please enter state.</small>
+				<div *ngIf="getState.invalid && getState.touched">
+					<small class="form-text text-danger"> Please select a state.</small>
+				</div>
 			</div>
 
 			<div class="form-group">
-				<label for="country">Country</label>
-				<input type="text" formControlName="country"
-      class="form-control"
-      id="country" placeholder="Enter country">
-
-				<small class="form-text text-danger"> Please enter country.</small>
+        <label for="country">Country</label>
+				<select class="form-control" name="country" formControlName="country">
+        <option value="default">Select a country</option>
+        <option value="India">India</option>
+        <option value="Australia">Australia</option>
+      </select>
+				<small class="text-danger" *ngIf="getCountry.invalid && getCountry.touched">Please select a country.</small>
 			</div>
+
 
 			<div class="form-group">
 				<label for="postcode">Postcode</label>
@@ -78,15 +78,25 @@
 			</div>
 				{{getPostcode.errors | json}}
 
-				<div *ngIf="getPostcode.errors">
-					<small *ngIf="getPostcode.errors.required"
-      class="form-text text-danger">Please enter a postcode.</small>
-					<small *ngIf="getPostcode.errors.pattern"
-      class="form-text text-danger"> Please enter valid postcode.</small>
+				<div *ngIf="getPostcode.invalid && getPostcode.touched">
+					<small *ngIf="getPostcode.errors.required" class="form-text text-danger">Please enter a postcode.</small>
+					<small *ngIf="getPostcode.errors.pattern" class="form-text text-danger"> Please enter valid postcode.</small>
 				</div>
 			</div>
 
-			<div class="form-check mb-5">
+			<div class="mb-10">
+				<label>Course Time preference</label>
+				<div class="form-check">
+					<input class="form-check-input" type="radio" formControlName="timePreference" name="timePreference" value="Morning" >
+					<span class="d-inline-block">Morning (9AM - 12PM)</span>
+				</div>
+				<div class="form-check">
+					<input class="form-check-input" type="radio" formControlName="timePreference" name="timePreference" value="Evening">
+					<span class="d-inline-block">Evening (5PM - 8PM)</span>
+				</div>
+			</div>
+
+			<div class="form-check mt-10">
 				<input class="form-check-input" formControlName="tnc" type="checkbox">
 				<label class="form-check-label "> I agree to terms and conditions</label>
 
