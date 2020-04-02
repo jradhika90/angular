@@ -51,14 +51,16 @@
 
 		<div formGroupName="address">
 
-			<div class="form-group">
-				<label for="state">State</label>
-				<input type="text" formControlName="state"
-      class="form-control" id="state" placeholder="Enter state">
-
-				<div *ngIf="getState.invalid && getState.touched">
-					<small class="form-text text-danger"> Please select a state.</small>
-				</div>
+      <div class="form-group">
+        <label for="state">State</label>
+				<select class="form-control" name="state" formControlName="state">
+        <option value="default">Select a state</option>
+        <option value="Karnataka">Karnataka</option>
+        <option value="Tamilnadu">Tamilnadu</option>
+        <option value="VIC">VIC</option>
+        <option value="NSW">NSW</option>
+      </select>
+				<small class="text-danger" *ngIf="getState.invalid && getState.touched">Please select a state.</small>
 			</div>
 
 			<div class="form-group">
