@@ -1,5 +1,6 @@
 import { Component, OnInit } from "@angular/core";
 import { FormGroup, FormControl,FormBuilder, Validators } from "@angular/forms";
+import {FieldMatch} from "../helpers/fieldmatch.validator"
  
 @Component({
   selector: "register-form",
@@ -27,7 +28,7 @@ constructor(private fb: FormBuilder){
     name: ['', Validators.compose([Validators.required, Validators.minLength(3)])],
     
     email: ['', Validators.compose([Validators.required,Validators.pattern("^[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,4}$")])],
-    password: [''],
+    password: ['', Validators.required],
     confirmpassword: [''],
 
     address: this.fb.group({
@@ -37,23 +38,26 @@ constructor(private fb: FormBuilder){
      }),
      timePreference:['Morning'],
      tnc:['', Validators.requiredTrue]
-  })
+  },
+  {
+    validator: FieldMatch("password", "confirmpassword")
+  });
 }
 
   ngOnInit() {
     this.registerForm.patchValue({
-      name: "Rad",
-      email: "test@abc.com",
+      name: "Ra",
+      email: "test@abc",
       password: "test",
       confirmpassword:"testing",
 
       address: {
         state: "default",
         country: "India",
-        postcode: "123478"
+        postcode: "123"
       },
-      timePreference: "Evening",
-      tnc: true
+      timePreference: "",
+      tnc: false
     });
 
     this.getStatesByCountry("India");
@@ -65,6 +69,14 @@ constructor(private fb: FormBuilder){
 
   get getEmail() {
     return this.registerForm.get('email');
+  }
+
+  get getPassword() {
+    return this.registerForm.get('password');
+  }
+
+  get getConfirmPassword() {
+    return this.registerForm.get('confirmpassword');
   }
 
   get getState() {

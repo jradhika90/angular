@@ -36,7 +36,20 @@
 
 		</div>
 
+    <div class="form-group">
+			<label for="password">Password</label>
+			<input type="text" formControlName="password" class="form-control" id="password" placeholder="Enter password">
 
+			<small *ngIf="getPassword.invalid && getPassword.touched" class="form-text text-danger"> Please enter valid password.</small>
+		</div>
+
+		<div class="form-group">
+			<label for="confirmpassword">Confirm Password</label>
+			<input type="text" formControlName="confirmpassword" class="form-control" id="confirmpassword" placeholder="Reenter password">
+
+			<small *ngIf="getConfirmPassword.touched  && getConfirmPassword.errors.Mismatch" class="form-text text-danger"> Please re-enter same password.</small>
+		</div>
+{{getConfirmPassword.errors | json}}
 		<div formGroupName="address">
 
 			<div class="form-group">
@@ -86,7 +99,7 @@
 				<input class="form-check-input" formControlName="tnc" type="checkbox">
 				<label class="form-check-label "> I agree to terms and conditions</label>
 
-				<div *ngIf="getTnc.errors">
+				<div *ngIf="getTnc.errors && getTnc.touched">
 					<small class="form-text text-danger"> Please agree to terms and conditions.</small></div>
 				{{getTnc.errors | json}}
 			</div>
