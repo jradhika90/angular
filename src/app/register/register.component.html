@@ -2,8 +2,9 @@
 
 	<h3> Registration Form </h3>
 	{{registerForm.value|json}}
-
-	<form [formGroup]="registerForm">
+	{{registerForm.status|json}}
+	{{statesArr|json}}
+	<form [formGroup]="registerForm" (ngSubmit)="saveData()">
 		<div class="form-group">
 			<label for="name">Name</label>
 			<input type="text" formControlName="name"
@@ -35,37 +36,12 @@
 
 		</div>
 
-		<div class="form-group">
-			<label for="password">Password</label>
-			<input type="text" formControlName="password" class="form-control" id="password" placeholder="Enter password">
-
-			<small class="form-text text-danger"> Please enter valid password.</small>
-		</div>
-
-		<div class="form-group">
-			<label for="confirmpassword">Confirm Password</label>
-			<input type="text" formControlName="confirmpassword" class="form-control" id="confirmpassword" placeholder="Reenter password">
-
-			<small [class.d-none]="" class="form-text text-danger"> Please enter confirm password.</small>
-		</div>
 
 		<div formGroupName="address">
 
-      <div class="form-group">
-        <label for="state">State</label>
-				<select class="form-control" name="state" formControlName="state">
-        <option value="default">Select a state</option>
-        <option value="Karnataka">Karnataka</option>
-        <option value="Tamilnadu">Tamilnadu</option>
-        <option value="VIC">VIC</option>
-        <option value="NSW">NSW</option>
-      </select>
-				<small class="text-danger" *ngIf="getState.invalid && getState.touched">Please select a state.</small>
-			</div>
-
 			<div class="form-group">
-        <label for="country">Country</label>
-				<select class="form-control" name="country" formControlName="country">
+				<label for="country">Country</label>
+				<select class="form-control" name="country" formControlName="country" (change)=getStatesByCountry(getCountry.value)>
         <option value="default">Select a country</option>
         <option value="India">India</option>
         <option value="Australia">Australia</option>
@@ -73,6 +49,14 @@
 				<small class="text-danger" *ngIf="getCountry.invalid && getCountry.touched">Please select a country.</small>
 			</div>
 
+			<div class="form-group">
+				<label for="state">State</label>
+				<select class="form-control" name="state" formControlName="state">
+        <option value="default">Select a State</option>
+        <option *ngFor="let state of statesArr" value="{{state}}">{{state}}</option> 
+      </select>
+				<small class="text-danger" *ngIf="getState.invalid && getState.touched">Please select a state.</small>
+			</div>
 
 			<div class="form-group">
 				<label for="postcode">Postcode</label>
@@ -107,7 +91,7 @@
 				{{getTnc.errors | json}}
 			</div>
 
-			<button class="btn btn-primary">Submit</button>
+			<button type="submit" class="btn btn-primary" [disabled]="registerForm.invalid">Submit</button>
 	</form>
 
 </div>

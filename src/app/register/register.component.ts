@@ -7,6 +7,8 @@ import { FormGroup, FormControl,FormBuilder, Validators } from "@angular/forms";
 })
 export class RegisterComponent implements OnInit {
   registerForm: FormGroup;
+  statesArr: Array<any>;
+  //statesArr:Array<{[key: string]: string}>
   // registerForm = new FormGroup({
   //   name: new FormControl(""),
   //   email: new FormControl(""),
@@ -40,21 +42,22 @@ constructor(private fb: FormBuilder){
 
   ngOnInit() {
     this.registerForm.patchValue({
-      name: "Ra",
-      email: "test@abc",
+      name: "Rad",
+      email: "test@abc.com",
       password: "test",
       confirmpassword:"testing",
 
       address: {
-        state: "VIC",
+        state: "default",
         country: "India",
-        postcode: "1234a"
+        postcode: "123478"
       },
       timePreference: "Evening",
       tnc: true
     });
-  }
 
+    this.getStatesByCountry("India");
+  }
   
   get getName() {
     return this.registerForm.get('name');
@@ -82,5 +85,33 @@ constructor(private fb: FormBuilder){
 
   get getTnc() {
     return this.registerForm.get('tnc');
+  }
+
+  getStatesByCountry(country){
+    console.log(country);
+    if(country == "India"){
+      //this.statesArr = [
+        //{"WB":"WestBengal"}, 
+        //{"TN":"Tamilnadu"}
+       // ];
+
+        this.statesArr = ["WestBengal","Tamilnadu"];
+    } 
+    else if(country == "Australia"){
+      //this.statesArr = [
+       // {"VIC":"Victoria"}, 
+       // {"NSW":"New South Wales"}
+        //];
+        this.statesArr = ["Victoria","New South Wales"];
+    }
+    else {
+      //this.statesArr = [{"default":"Select a country"}];
+      this.statesArr = ["Select a country"];
+    }
+  }
+
+  saveData(){
+    console.log("in savedata");
+    console.log(this.registerForm.value);
   }
 }
