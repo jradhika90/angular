@@ -46,7 +46,7 @@
 			<label for="confirmpassword">Confirm Password</label>
 			<input type="text" formControlName="confirmpassword" class="form-control" id="confirmpassword" placeholder="Reenter password">
 
-			<small *ngIf="formHasError || (getConfirmPassword.touched  && getConfirmPassword.errors.Mismatch)" class="form-text text-danger"> Please re-enter same password.</small>
+			<small *ngIf="formHasError || (getConfirmPassword.touched  && getConfirmPassword.errors)" class="form-text text-danger"> Please re-enter same password.</small>
 		</div>
 
 		<div formGroupName="address">
