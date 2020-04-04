@@ -9,6 +9,7 @@ import {FieldMatch} from "../helpers/fieldmatch.validator"
 export class RegisterComponent implements OnInit {
   registerForm: FormGroup;
   statesArr: Array<any>;
+  formHasError:Boolean;
   //statesArr:Array<{[key: string]: string}>
   // registerForm = new FormGroup({
   //   name: new FormControl(""),
@@ -36,7 +37,7 @@ constructor(private fb: FormBuilder){
       country: [''],
       postcode: ['', Validators.compose([Validators.required,Validators.pattern('[0-9]{6}')])],
      }),
-     timePreference:['Morning'],
+     timePreference:['', Validators.required],
      tnc:['', Validators.requiredTrue]
   },
   {
@@ -45,6 +46,8 @@ constructor(private fb: FormBuilder){
 }
 
   ngOnInit() {
+    this.formHasError = false;
+
     this.registerForm.patchValue({
       name: "Ra",
       email: "test@abc",
@@ -124,6 +127,14 @@ constructor(private fb: FormBuilder){
 
   saveData(){
     console.log("in savedata");
-    console.log(this.registerForm.value);
+
+    if(this.registerForm.valid){
+      this.formHasError = false;
+      console.log(this.registerForm.value);
+    }
+    else {
+      this.formHasError = true;
+      console.log("invalid form data");
+    }
   }
 }
