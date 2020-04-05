@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
+import { Observable, of, throwError } from 'rxjs';
 import { catchError } from 'rxjs/operators';
-import { throwError } from 'rxjs';
 import { User } from '../models/user.model';
 import { USERS } from '../db/mock-users';
 
@@ -11,6 +11,7 @@ import { USERS } from '../db/mock-users';
 
 export class UserService {
     registerUrl = '';
+    usersUrl = '';
 
     constructor(private http: HttpClient) { 
       console.log('in service const');
@@ -22,8 +23,11 @@ export class UserService {
       return true;
     }
   
-    getAll(){}
-    search(){}
-    delete(){}
-    update(){}
+    getAllUsers(): Observable<User[]> {
+        //return this.http.get<any>(this.usersUrl);
+        return of(USERS);
+    }
+    searchUsers(){}
+    deleteUser(){}
+    updateUser(){}
 }
