@@ -3,6 +3,7 @@ import { HttpClient } from '@angular/common/http';
 import { catchError } from 'rxjs/operators';
 import { throwError } from 'rxjs';
 import { User } from '../models/user.model';
+import { USERS } from '../db/mock-users';
 
 @Injectable({
   providedIn:'root'
