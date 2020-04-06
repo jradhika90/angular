@@ -13,16 +13,17 @@ export class UserdetailsComponent implements OnInit {
 
   constructor(private us: UserService){}
   ngOnInit() {
-    this.getUserDetails('1');
+    this.getUserDetails('3');
   }
 
   getUserDetails(userId){
     console.log('in user details component function', userId);
-    this.us.getUser(userId);
+    //this.us.getUser(userId);
 
-    // this.us.getAllUsers().subscribe(
-    //     data => this.selectedUser = data,
-    //     error => this.errorMsg = error.statusText
-    //   )
+    this.us.getUser(userId).subscribe(
+        data => this.selectedUser = data,
+        error => this.errorMsg = error.statusText
+      )
+      console.log('inside getuserdetails component', this.selectedUser);
   }
 }

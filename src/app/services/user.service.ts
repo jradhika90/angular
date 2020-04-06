@@ -29,9 +29,11 @@ export class UserService {
     }
 
     //getUser(userId): Observable<User> {
-    getUser(userId) {
-      console.log(USERS[userId]);
-      //return of(USERS[userId]);
+    getUser(userId): Observable<User> {
+      let i = userId-1;
+      let selUser = USERS[i];
+      console.log('inside getUser',selUser);
+      return of(selUser);
     }
     searchUsers(){}
     deleteUser(){}

@@ -8,7 +8,7 @@ import { HelloComponent } from './hello.component';
 import { TestComponent } from './test.component';
 import { RegisterComponent } from './register/register.component';
 import { DashboardComponent } from './dashboard/list/dashboard.component';
-import { UserdetailsComponent } from './dashboard/details/dashboard.component';
+import { UserdetailsComponent } from './dashboard/details/userdetails.component';
 
 
 @NgModule({
