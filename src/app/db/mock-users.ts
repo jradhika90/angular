@@ -2,6 +2,7 @@ import { User } from "../models/user.model";
 
 export const USERS: User[] = [
   {
+    id:1,
     name: 'Ada',
     email: 'ada@test.com',
     password: 'ada',
@@ -13,6 +14,7 @@ export const USERS: User[] = [
     altEmails:['']
   },
   {
+    id:2,
     name: 'Babu',
     email: 'babu@test.com',
     password: 'babu',
@@ -24,6 +26,7 @@ export const USERS: User[] = [
     altEmails:['']
   },
   {
+    id: 3,
     name: 'Casey',
     email: 'casey@test.com',
     password: 'ada',
@@ -35,6 +38,7 @@ export const USERS: User[] = [
     altEmails:['']
   },
   {
+    id: 4,
     name: 'Dia',
     email: 'dia@test.com',
     password: 'dia',
@@ -46,6 +50,7 @@ export const USERS: User[] = [
     altEmails:['']
   },
   {
+    id: 5,
     name: 'Elvin',
     email: 'elvin@test.com',
     password: 'elvin',

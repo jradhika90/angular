@@ -151,6 +151,7 @@ export class RegisterComponent implements OnInit {
     if (this.registerForm.valid) {
       let formValues = this.registerForm.value;
       let userModel = new User(
+        0,
         formValues.name,
         formValues.email,
         formValues.password,

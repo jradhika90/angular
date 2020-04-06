@@ -27,6 +27,12 @@ export class UserService {
         //return this.http.get<any>(this.usersUrl);
         return of(USERS);
     }
+
+    //getUser(userId): Observable<User> {
+    getUser(userId) {
+      console.log(USERS[userId]);
+      //return of(USERS[userId]);
+    }
     searchUsers(){}
     deleteUser(){}
     updateUser(){}
