@@ -13,7 +13,7 @@ import { UserdetailsComponent } from './dashboard/details/userdetails.component'
 
 
 @NgModule({
-  imports:      [ BrowserModule, FormsModule, ReactiveFormsModule, HttpClientModule ],
+  imports:      [ BrowserModule, FormsModule, ReactiveFormsModule, HttpClientModule, AppRoutingModule ],
   declarations: [ AppComponent, HelloComponent, TestComponent , RegisterComponent, DashboardComponent, UserdetailsComponent],
   bootstrap:    [ AppComponent ]
 })

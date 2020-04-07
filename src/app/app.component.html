@@ -1,11 +1,10 @@
-<header>
-	<button type="button" class="btn btn-link">Register</button>
-	<button type="button" class="btn btn-link">Login</button>
-
-</header>
 <div class="container-fluid">
+		<nav class="navbar">
+			<a class="navbar-brand btn-primary" routerLink="" routerLinkActive="active">Home</a>
+			<a class="navbar-brand btn-primary" routerLink="/register" routerLinkActive="active">Register</a>
+		</nav>
 	<!--<register-form></register-form>-->
 	<!--<dashboard></dashboard>-->
-  <user-details></user-details>
-
+	<!--<user-details></user-details>-->
+	<router-outlet></router-outlet>
 </div>
