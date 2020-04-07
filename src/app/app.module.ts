@@ -10,11 +10,11 @@ import { TestComponent } from './test.component';
 import { RegisterComponent } from './register/register.component';
 import { DashboardComponent } from './dashboard/list/dashboard.component';
 import { UserdetailsComponent } from './dashboard/details/userdetails.component';
-
+import { PageNotFoundComponent } from './error-handler/page-not-found/page-not-found.component';
 
 @NgModule({
   imports:      [ BrowserModule, FormsModule, ReactiveFormsModule, HttpClientModule, AppRoutingModule ],
-  declarations: [ AppComponent, HelloComponent, TestComponent , RegisterComponent, DashboardComponent, UserdetailsComponent],
+  declarations: [ AppComponent, HelloComponent, TestComponent , RegisterComponent, DashboardComponent, UserdetailsComponent, PageNotFoundComponent],
   bootstrap:    [ AppComponent ]
 })
 export class AppModule { }
