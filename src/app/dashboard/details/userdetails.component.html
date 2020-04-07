@@ -6,3 +6,7 @@
 	<li><label>Country:</label> {{selectedUser.country}}</li>
 	<li><label>Postcode:</label> {{selectedUser.postcode}}</li>
 </ul>
+<p>
+  <button (click)="previous()" [disabled]="prevUserId == 0" [className]="prevUserId == 0?'btn-secondary':'btn-primary'">Previous</button>
+  <button (click)="next()" [disabled]="nextUserId > totalUsers" [className]="nextUserId > totalUsers?'btn-secondary':'btn-primary'">Next</button>
+</p>

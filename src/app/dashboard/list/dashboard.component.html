@@ -9,6 +9,7 @@
   <thead>
     <tr>
       <th scope="col">#</th>
+      <th scope="col">Id</th>
       <th scope="col">Name</th>
       <th scope="col">Email</th>
       <th scope="col">State</th>
@@ -20,12 +21,13 @@
   </thead>
   <tbody>
     <tr *ngFor="let user of userList; let i=index" >
-      <th scope="row">{{i+1}}</th>
+      <td scope="row">{{i+1}}</td>
+      <td scope="col">{{user.id}}</td>
       <td>{{user.name}}</td>
       <td>{{user.email}}</td>
       <td>{{user.state}}</td>
       <td>{{user.country}}</td>
-      <td><a>View</a></td>
+      <td><a (click)= "viewUser(user.id)">View</a></td>
       <td><a>Edit</a></td>
       <td>Delete</td>
     </tr>
