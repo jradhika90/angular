@@ -3,6 +3,7 @@ import { FormGroup, FormControl, FormBuilder, Validators } from "@angular/forms"
 import { FieldMatch } from "../helpers/fieldmatch.validator";
 import { User } from "../models/user.model";
 import { UserService } from "../services/user.service";
+import { StatesByCountry } from "../helpers/statesbycountry"
 
 @Component({
   selector: "register-form",
@@ -123,24 +124,7 @@ export class RegisterComponent implements OnInit {
   }
 
   getStatesByCountry(country) {
-    console.log(country);
-    if (country == "India") {
-      //this.statesArr = [
-      //{"WB":"WestBengal"},
-      //{"TN":"Tamilnadu"}
-      // ];
-
-      this.statesArr = ["WestBengal", "Tamilnadu"];
-    } else if (country == "Australia") {
-      //this.statesArr = [
-      // {"VIC":"Victoria"},
-      // {"NSW":"New South Wales"}
-      //];
-      this.statesArr = ["Victoria", "New South Wales"];
-    } else {
-      //this.statesArr = [{"default":"Select a country"}];
-      this.statesArr = ["Select a country"];
-    }
+    this.statesArr = StatesByCountry(country);
   }
 
   saveData() {
@@ -161,6 +145,7 @@ export class RegisterComponent implements OnInit {
         formValues.address.postcode,
         formValues.timePreference,
         formValues.tnc,
+        true,
         ['']
       );
       this.us.register(userModel);

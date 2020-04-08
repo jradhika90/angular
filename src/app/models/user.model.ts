@@ -9,5 +9,6 @@ export class User {
   public postcode : Number,
   public timePreference : String, 
   public tnc : Boolean,
+  public subscription: Boolean,
   public altEmails : Array<String>){}
 }
