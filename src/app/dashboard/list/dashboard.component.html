@@ -28,7 +28,7 @@
       <td>{{user.state}}</td>
       <td>{{user.country}}</td>
       <td><a (click)= "viewUser(user.id)">View</a></td>
-      <td><a>Edit</a></td>
+      <td><a (click)= "updateUser(user.id)">Edit</a></td>
       <td>Delete</td>
     </tr>
   </tbody>

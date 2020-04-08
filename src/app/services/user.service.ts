@@ -33,7 +33,7 @@ export class UserService {
   }
 
   //getUserCount(): Observable<any>{
-    getUserCount(){
+  getUserCount(){
     let arr = [{'count': USERS.length}];
     console.log('in user count',arr);
     return of(arr);
@@ -48,7 +48,11 @@ export class UserService {
     return true;
   }
 
-  updateUser() {}
+  updateUser(userdata) {
+     console.log(
+      "in service user-> updatedata--->" + JSON.stringify(userdata)
+    );
+  }
 
   searchUsers() {}
 }

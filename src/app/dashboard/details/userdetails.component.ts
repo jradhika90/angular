@@ -18,18 +18,17 @@ export class UserdetailsComponent implements OnInit {
   constructor(private us: UserService, private router: Router, private route: ActivatedRoute){}
 
   ngOnInit() {
-    this.totalUsers = 5;
     this.us.getUserCount().subscribe(data=>this.totalUsers=data[0].count);
    // this.userId = parseInt(this.route.snapshot.paramMap.get("id"));
    //above statement will not work if navigating within the same component as snapshot will not reinitialize and same component and hence nginit will not be executed
 
-  this.route.paramMap.subscribe((params: ParamMap) => {
-    this.userId = parseInt(params.get("id"));
-    this.prevUserId = this.userId - 1;
-    this.nextUserId = this.userId + 1;
+    this.route.paramMap.subscribe((params: ParamMap) => {
+      this.userId = parseInt(params.get("id"));
+      this.prevUserId = this.userId - 1;
+      this.nextUserId = this.userId + 1;
 
-    this.viewUserDetails(this.userId);
-   });
+      this.viewUserDetails(this.userId);
+    });
   }
 
   viewUserDetails(userId){

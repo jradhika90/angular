@@ -25,9 +25,12 @@ export class DashboardComponent implements OnInit {
       )
   }
 
+  updateUser(userId){
+    this.router.navigate(["/edit-user",userId]);
+  }
+
   viewUser(userId){
     this.router.navigate(["/user",userId]);
   }
-
   searchUsers(userValue){}
 }

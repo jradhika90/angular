@@ -6,11 +6,12 @@ export const USERS: User[] = [
     name: 'Ada',
     email: 'ada@test.com',
     password: 'ada',
-    state: 'VIC',
+    state: 'Victoria',
     country: 'Australia',
     postcode: 123456,
     timePreference: 'Morning',
     tnc: true,
+    subscription: true,
     altEmails:['']
   },
   {
@@ -23,18 +24,20 @@ export const USERS: User[] = [
     postcode: 987654,
     timePreference: 'Morning',
     tnc: false,
+    subscription: false,
     altEmails:['']
   },
   {
     id: 3,
     name: 'Casey',
     email: 'casey@test.com',
-    password: 'ada',
+    password: 'casey',
     state: 'New South Wales',
     country: 'Australia',
     postcode: 123564,
     timePreference: 'Morning',
     tnc: true,
+    subscription: true,
     altEmails:['']
   },
   {
@@ -42,11 +45,12 @@ export const USERS: User[] = [
     name: 'Dia',
     email: 'dia@test.com',
     password: 'dia',
-    state: 'Westbengal',
+    state: 'WestBengal',
     country: 'India',
     postcode: 897650,
     timePreference: 'Morning',
     tnc: true,
+    subscription: false,
     altEmails:['']
   },
   {
@@ -59,6 +63,7 @@ export const USERS: User[] = [
     postcode: 125634,
     timePreference: 'Evening',
     tnc: false,
+    subscription: true,
     altEmails:['']
   }
 ];
