@@ -13,7 +13,8 @@ export class RegisterComponent implements OnInit {
   registerForm: FormGroup;
   statesArr: Array<any>;
   formHasError: Boolean;
-  alternateEmailsArr: Array<string>;
+  alternateEmailsArr: string[];
+  x:number;
   //statesArr:Array<{[key: string]: string}>
   // registerForm = new FormGroup({
   //   name: new FormControl(""),
@@ -70,6 +71,7 @@ export class RegisterComponent implements OnInit {
   ngOnInit() {
     this.formHasError = false;
     this.alternateEmailsArr = [];
+    this.x=0;
 
     this.registerForm.patchValue({
       name: "Raa",
@@ -132,8 +134,9 @@ export class RegisterComponent implements OnInit {
 
   addAlternateEmail(){
     console.log('alternate emails', this.alternateEmailsArr);
-    this.alternateEmailsArr.push('');
+    this.alternateEmailsArr.push(this.x+"email");
     this.getAlternateEmails.push(this.fb.control(''));
+    this.x = this.x+1;
     console.log('alternate emails', this.alternateEmailsArr);   
   }
 
@@ -143,8 +146,8 @@ export class RegisterComponent implements OnInit {
 
   removeAlternateEmail(index: number) {
     //console.log('removeAlternateEmail', index);
-   // this.alternateEmailsArr.splice((index+1),1);
-    //this.getAlternateEmails.removeAt(index);
+    this.alternateEmailsArr.splice((index),1);
+    this.getAlternateEmails.removeAt(index);
   }
 
   saveData() {
