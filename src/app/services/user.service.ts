@@ -18,9 +18,10 @@ export class UserService {
 
   deleteUser() {}
 
-  // get users list
-  getAllUsers(): Observable<User[]> {
-    //return this.http.get<any>(this.usersUrl);
+  // get users list 
+  getAllUsers(searchStr=''): Observable<User[]> {
+    let searchArr = [{'searchString' : searchStr}]
+    //return this.http.get<any>(this.usersUrl, searchArr);
     return of(USERS);
   }
 
@@ -28,31 +29,25 @@ export class UserService {
   getUser(userId): Observable<User> {
     let i = userId - 1;
     let selUser = USERS[i];
-    console.log("inside getUser", selUser);
+
     return of(selUser);
   }
 
-  //getUserCount(): Observable<any>{
-  getUserCount(){
+  getUserCount(): Observable<any>{
     let arr = [{'count': USERS.length}];
-    console.log('in user count',arr);
     return of(arr);
     //return this.http.get<any>(this.userCountUrl);
   }
+
   // registers a new user into database
   register(registerData: User) {
-    console.log(
-      "in service user-> register--->" + JSON.stringify(registerData)
-    );
+    console.log("in service user-> register--->" + JSON.stringify(registerData));
     //return this.http.post<any>(this.registerUrl, registerData);
     return true;
   }
 
   updateUser(userdata) {
-     console.log(
-      "in service user-> updatedata--->" + JSON.stringify(userdata)
-    );
+     console.log("in service user-> updatedata--->" + JSON.stringify(userdata));
+    //return this.http.post<any>(this.updateUserUrl, userdata);
   }
-
-  searchUsers() {}
 }

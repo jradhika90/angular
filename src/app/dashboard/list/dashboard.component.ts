@@ -9,8 +9,9 @@ import { Router } from "@angular/router";
 })
 export class DashboardComponent implements OnInit {
   userList: Array<any>;
-  errorMsg:String;
-  userId: Number;
+  errorMsg:string;
+  userId: number;
+  searchStr: string;
 
   constructor(private us: UserService, private router:Router){}
   ngOnInit() {
@@ -32,5 +33,11 @@ export class DashboardComponent implements OnInit {
   viewUser(userId){
     this.router.navigate(["/user",userId]);
   }
-  searchUsers(userValue){}
+  searchUsers(event){
+    this.searchStr = event.target.value;
+    this.us.getAllUsers(this.searchStr).subscribe(
+        users => this.userList = users,
+        error => this.errorMsg = error.statusText
+      )
+  }
 }
