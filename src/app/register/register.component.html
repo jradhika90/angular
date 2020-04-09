@@ -1,107 +1,126 @@
 <h3> Registration Form </h3>
-	{{registerForm.value|json}}
-	{{registerForm.status|json}}
-	{{statesArr|json}}
-	{{formHasError}}
-	<form [formGroup]="registerForm" (ngSubmit)="saveData()">
-		<div class="form-group">
-			<label for="name">Name</label>
-			<input type="text" formControlName="name"
+{{registerForm.value|json}}
+{{registerForm.status|json}}
+{{statesArr|json}}
+{{formHasError}}
+<form [formGroup]="registerForm" (ngSubmit)="saveData()">
+	<div class="form-group">
+		<label for="name">Name</label>
+		<input type="text" formControlName="name"
        class="form-control"
       id="name" placeholder="Enter name">
 
-			<div *ngIf="formHasError || (getName.invalid && getName.touched)">
-				<small *ngIf="getName.errors.required"
+		<div *ngIf="formHasError || (getName.invalid && getName.touched)">
+			<small *ngIf="getName.errors.required"
       class="form-text text-danger">Please enter a name.</small>
-				<small *ngIf="getName.errors.minlength"
+			<small *ngIf="getName.errors.minlength"
       class="form-text text-danger"> Name should be minimum 3 characters.</small>
-			</div>
 		</div>
+	</div>
 
-		<div class="form-group">
-			<label for="email">Email</label>
-			<input type="email" formControlName="email"
+	<div class="form-group">
+		<label for="email">Email</label>
+		<input type="email" formControlName="email"
       [class.is-invalid]="getEmail.invalid && getEmail.touched" class="form-control"
       id="email" placeholder="Enter name">
 
 
-			<div *ngIf="formHasError || (getEmail.invalid && getEmail.touched)">
-				<small *ngIf="getEmail.errors.required"
+		<div *ngIf="formHasError || (getEmail.invalid && getEmail.touched)">
+			<small *ngIf="getEmail.errors.required"
       class="form-text text-danger">Please enter an email.</small>
-				<small
+			<small
       class="form-text text-danger"> Please enter valid email.</small>
-			</div>
 		</div>
+	</div>
+
+	<div class="form-group">
+		<label for="altEmails">Alternate Email(s)</label>
+    <button type="button" class="btn btn-secondary btn-sm m-2" (click)="addAlternateEmail()">+</button>
+{{alternateEmailsArr | json}}
+{{getAlternateEmails.value | json}}
+      <div formArrayName="altEmails" *ngFor="let email of alternateEmailsArr; let i=index">
+       {{i}}
+        <input type="text" class="form-control my-1" [formControlName]="i">
+        <button type="button" class="btn btn-secondary btn-sm m-2" (click)="removeAlternateEmail(i)">-</button>
+      </div>
+
+
+		<div *ngIf="formHasError || (getAlternateEmails.invalid && getAlternateEmails.touched)">
+			<small
+      class="form-text text-danger"> Please enter valid email.</small>
+		</div>
+	</div>
+
+
+	<div class="form-group">
+		<label for="password">Password</label>
+		<input type="text" formControlName="password" class="form-control" id="password" placeholder="Enter password">
+
+		<small *ngIf="formHasError || (getPassword.invalid && getPassword.touched)" class="form-text text-danger"> Please enter valid password.</small>
+	</div>
+
+	<div class="form-group">
+		<label for="confirmpassword">Confirm Password</label>
+		<input type="text" formControlName="confirmpassword" class="form-control" id="confirmpassword" placeholder="Reenter password">
+
+		<small *ngIf="formHasError || (getConfirmPassword.touched  && getConfirmPassword.errors)" class="form-text text-danger"> Please re-enter same password.</small>
+	</div>
+
+	<div formGroupName="address">
 
 		<div class="form-group">
-			<label for="password">Password</label>
-			<input type="text" formControlName="password" class="form-control" id="password" placeholder="Enter password">
-
-			<small *ngIf="formHasError || (getPassword.invalid && getPassword.touched)" class="form-text text-danger"> Please enter valid password.</small>
-		</div>
-
-		<div class="form-group">
-			<label for="confirmpassword">Confirm Password</label>
-			<input type="text" formControlName="confirmpassword" class="form-control" id="confirmpassword" placeholder="Reenter password">
-
-			<small *ngIf="formHasError || (getConfirmPassword.touched  && getConfirmPassword.errors)" class="form-text text-danger"> Please re-enter same password.</small>
-		</div>
-
-		<div formGroupName="address">
-
-			<div class="form-group">
-				<label for="country">Country</label>
-				<select class="form-control" name="country" formControlName="country" (change)=getStatesByCountry(getCountry.value)>
+			<label for="country">Country</label>
+			<select class="form-control" name="country" formControlName="country" (change)=getStatesByCountry(getCountry.value)>
         <option value="default">Select a country</option>
         <option value="India">India</option>
         <option value="Australia">Australia</option>
       </select>
-				<small class="text-danger" *ngIf="formHasError || (getCountry.invalid && getCountry.touched)">Please select a country.</small>
-			</div>
+			<small class="text-danger" *ngIf="formHasError || (getCountry.invalid && getCountry.touched)">Please select a country.</small>
+		</div>
 
-			<div class="form-group">
-				<label for="state">State</label>
-				<select class="form-control" name="state" formControlName="state">
+		<div class="form-group">
+			<label for="state">State</label>
+			<select class="form-control" name="state" formControlName="state">
         <option value="default">Select a State</option>
         <option *ngFor="let state of statesArr" value="{{state}}">{{state}}</option> 
       </select>
-				<small class="text-danger" *ngIf="formHasError || (getState.invalid && getState.touched)">Please select a state.</small>
+			<small class="text-danger" *ngIf="formHasError || (getState.invalid && getState.touched)">Please select a state.</small>
+		</div>
+
+		<div class="form-group">
+			<label for="postcode">Postcode</label>
+			<input type="text" formControlName="postcode" class="form-control" id="postcode" placeholder="Enter postcode">
 			</div>
 
-			<div class="form-group">
-				<label for="postcode">Postcode</label>
-				<input type="text" formControlName="postcode" class="form-control" id="postcode" placeholder="Enter postcode">
+			<div *ngIf="formHasError || (getPostcode.invalid && getPostcode.touched)">
+				<small *ngIf="getPostcode.errors.required" class="form-text text-danger">Please enter a postcode.</small>
+				<small *ngIf="getPostcode.errors.pattern" class="form-text text-danger"> Please enter valid postcode.</small>
 			</div>
+		</div>
 
-				<div *ngIf="formHasError || (getPostcode.invalid && getPostcode.touched)">
-					<small *ngIf="getPostcode.errors.required" class="form-text text-danger">Please enter a postcode.</small>
-					<small *ngIf="getPostcode.errors.pattern" class="form-text text-danger"> Please enter valid postcode.</small>
-				</div>
+		<div class="mb-10">
+			<label>Course Time preference</label>
+			<div class="form-check">
+				<input class="form-check-input" type="radio" formControlName="timePreference" name="timePreference" value="Morning" >
+				<span class="d-inline-block">Morning (9AM - 12PM)</span>
 			</div>
-
-			<div class="mb-10">
-				<label>Course Time preference</label>
-				<div class="form-check">
-					<input class="form-check-input" type="radio" formControlName="timePreference" name="timePreference" value="Morning" >
-					<span class="d-inline-block">Morning (9AM - 12PM)</span>
-				</div>
-				<div class="form-check">
-					<input class="form-check-input" type="radio" formControlName="timePreference" name="timePreference" value="Evening">
-					<span class="d-inline-block">Evening (5PM - 8PM)</span>
-				</div>
-				<div *ngIf="formHasError || (getTimePreference.invalid && getTimePreference.touched)">
-					<small *ngIf="getTimePreference.errors.required" class="form-text text-danger"> Please select your preferred time.</small>
-				</div>
+			<div class="form-check">
+				<input class="form-check-input" type="radio" formControlName="timePreference" name="timePreference" value="Evening">
+				<span class="d-inline-block">Evening (5PM - 8PM)</span>
 			</div>
-
-			<div class="form-check mt-10">
-				<input class="form-check-input" formControlName="tnc" type="checkbox" id="defaultCheck2">
-				<label class="form-check" for="defaultCheck2"> I agree to terms and conditions</label>
-
-				<div *ngIf="formHasError || (getTnc.invalid && getTnc.touched)">
-					<small *ngIf="getTnc.errors.required" class="form-text text-danger"> Please agree to terms and conditions.</small>
-				</div>
+			<div *ngIf="formHasError || (getTimePreference.invalid && getTimePreference.touched)">
+				<small *ngIf="getTimePreference.errors.required" class="form-text text-danger"> Please select your preferred time.</small>
 			</div>
+		</div>
 
-			<button type="submit" class="btn btn-primary" [disabled]="registerForm.invalid">Submit</button>
-	</form>
+		<div class="form-check mt-10">
+			<input class="form-check-input" formControlName="tnc" type="checkbox" id="defaultCheck2">
+			<label class="form-check" for="defaultCheck2"> I agree to terms and conditions</label>
+
+			<div *ngIf="formHasError || (getTnc.invalid && getTnc.touched)">
+				<small *ngIf="getTnc.errors.required" class="form-text text-danger"> Please agree to terms and conditions.</small>
+			</div>
+		</div>
+
+		<button type="submit" class="btn btn-primary" [disabled]="registerForm.invalid">Submit</button>
+</form>

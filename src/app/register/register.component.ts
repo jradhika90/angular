@@ -1,5 +1,5 @@
 import { Component, OnInit } from "@angular/core";
-import { FormGroup, FormControl, FormBuilder, Validators } from "@angular/forms";
+import { FormGroup, FormControl, FormBuilder, Validators, FormArray } from "@angular/forms";
 import { FieldMatch } from "../helpers/fieldmatch.validator";
 import { User } from "../models/user.model";
 import { UserService } from "../services/user.service";
@@ -13,6 +13,7 @@ export class RegisterComponent implements OnInit {
   registerForm: FormGroup;
   statesArr: Array<any>;
   formHasError: Boolean;
+  alternateEmailsArr: Array<string>;
   //statesArr:Array<{[key: string]: string}>
   // registerForm = new FormGroup({
   //   name: new FormControl(""),
@@ -68,6 +69,7 @@ export class RegisterComponent implements OnInit {
 
   ngOnInit() {
     this.formHasError = false;
+    this.alternateEmailsArr = [];
 
     this.registerForm.patchValue({
       name: "Raa",
@@ -85,6 +87,7 @@ export class RegisterComponent implements OnInit {
     });
 
     this.getStatesByCountry("India");
+    this.addAlternateEmail();
   }
 
   get getName() {
@@ -123,8 +126,25 @@ export class RegisterComponent implements OnInit {
     return this.registerForm.get("tnc");
   }
 
+  get getAlternateEmails() {
+    return this.registerForm.get("altEmails") as FormArray;
+  }
+
+  addAlternateEmail(){
+    console.log('alternate emails', this.alternateEmailsArr);
+    this.alternateEmailsArr.push('');
+    this.getAlternateEmails.push(this.fb.control(''));
+    console.log('alternate emails', this.alternateEmailsArr);   
+  }
+
   getStatesByCountry(country) {
     this.statesArr = StatesByCountry(country);
+  }
+
+  removeAlternateEmail(index: number) {
+    //console.log('removeAlternateEmail', index);
+   // this.alternateEmailsArr.splice((index+1),1);
+    //this.getAlternateEmails.removeAt(index);
   }
 
   saveData() {
@@ -146,7 +166,7 @@ export class RegisterComponent implements OnInit {
         formValues.timePreference,
         formValues.tnc,
         true,
-        ['']
+        formValues.altEmails
       );
       this.us.register(userModel);
       //console.log(this.registerForm.value);
